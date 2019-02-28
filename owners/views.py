@@ -7,6 +7,7 @@ from owners.models import Owner
 from owners.serializers import OwnerSerializer
 # Create your views here.
 
+
 @csrf_exempt
 def owner_list(request):
     """
