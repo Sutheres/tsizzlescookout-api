@@ -5,6 +5,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from owners.models import Owner
 from owners.serializers import OwnerSerializer
+from .utils.rank_system import rank_system
 # Create your views here.
 
 
@@ -14,9 +15,10 @@ def owner_list(request):
     List all owners, or create a new one
     """
     if request.method == 'GET':
-        owners = Owner.objects.all()
+        owners = Owner.objects.order_by('all_time_rank')
         serializer = OwnerSerializer(owners, many=True)
         return JsonResponse(serializer.data, safe=False)
+
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
@@ -34,6 +36,12 @@ def owner_detail(request, pk):
     """
     try:
         owner = Owner.objects.get(pk=pk)
+        seasons = owner.seasons.all()
+        rs_wins = 0
+        for x in seasons:
+            rs_wins += x.wins
+
+
     except Owner.DoesNotExist:
         return HttpResponse(status=404)
 

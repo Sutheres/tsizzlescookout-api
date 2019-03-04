@@ -9,6 +9,7 @@ class Owner(models.Model):
     instagram_name = models.CharField(max_length=200, blank=True)
     twitter_name = models.CharField(max_length=200, blank=True)
     current_participant = models.BooleanField(null=True)
+    all_time_rank = models.IntegerField(null=True)
 
     def __str__(self):
         return self.name

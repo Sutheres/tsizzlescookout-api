@@ -9,7 +9,7 @@ class SeasonInline(admin.TabularInline):
 
 
 class OwnerAdmin(admin.ModelAdmin):
-    fields = ['name', 'email', 'phone_number', 'instagram_name', 'twitter_name', 'current_participant']
+    fields = ['name', 'all_time_rank','email', 'phone_number', 'instagram_name', 'twitter_name', 'current_participant']
     inlines = [SeasonInline]
     list_display = ('name', 'current_participant')
 
